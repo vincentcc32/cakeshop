@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="./public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./public/css/normalize.min.css">
+    <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="stylesheet" href="./public/css/responsive.css">
+    <title>Cake Shop</title>
+    <!--[if lte IE 9]>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js" integrity="sha512-i/6nAYMMwXZ3dTsq+ngdkSl4MbtVQF0FdCeqP5/1HSXPxyEd43vrxhafg1P4iqKRAnZVHn48GYaFUYRcTB0YrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<![endif]-->
+</head>
+
+<body>
+
+
+    <header class="header p-3 position-sticky top-0">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-4 d-flex justify-content-start">
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="d-inline-block header__wapper-icon-search">
+                            <i class="fa-solid fa-magnifying-glass fs-2 cursor-pointer" role="button"
+                                data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+                        </span>
+                        <span class="fs-3 text-white d-none d-sm-block">Tìm kiếm</span>
+                    </div>
+                </div>
+                <div class="col-4 d-flex justify-content-center">
+                    <div class="header__logo">
+                        <a href="#" class="d-block w-100 text-center">
+                            <img src="./public/images/logo.png" alt="" class="w-100 h-100">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-4 d-flex justify-content-end gap-4">
+                    <div class="position-relative">
+                        <i class="fa-solid fa-bars text-white fs-2 cursor-pointer dropdown-toggle "
+                            data-bs-toggle="dropdown" aria-expanded="false" role="button"></i>
+                        <ul class="position-absolute top-100 end-0 bg-white py-4 px-3 list-unstyled rounded-5 dropdown-menu"
+                            style="width: 25rem; border: 1px solid #9e553b;">
+                            <li class="p-3" style="border-bottom: 1px solid #9e553b;">
+                                <a href="#" class="fs-4 text-decoration-none text-black">
+                                    <img src="./public/images/home.png" alt="" style="width: 3rem;">
+                                    Trang Chủ</a>
+                            </li>
+                            <li class="p-2" style="border-bottom: 1px solid #9e553b;">
+                                <a href="#" class="fs-4 text-decoration-none text-black">
+                                    <img src="./public/images/cauchuyen.png" alt="" style="width: 3rem;">
+                                    Câu Chuyện Thương Hiệu</a>
+                            </li>
+                            <li class="p-2">
+                                <a href="#" class="fs-4 text-decoration-none text-black">
+                                    <img src="./public/images/lienhe.png" alt="" style="width: 3rem;">
+                                    Liên Hệ</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="position-relative">
+                        <a href="#">
+                            <i class="fa-solid fa-cart-shopping text-white fs-2"></i>
+                            <span class="position-absolute fs-3 text-white" style="top: -80%; right: -80%;">(0)</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main__product pb-5">
+        <div class="main__product-banner">
+            <img src="./public/images/banner-product.png" alt="" class="w-100">
+        </div>
+        <div class="main__product-wapper">
+            <div class="text-center">
+                <h2 class="text-uppercase text-center d-inline-block main-heading">Bánh kem</h2>
+            </div>
+            <div class="container mt-5">
+                <div class="row gy-5 gx-4 mb-5 pb-5">
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <a href="#" class="text-decoration-none">
+                            <div class="main__product-item p-5 position-relative">
+                                <div class="w-100">
+                                    <img src="./public/images/sp1.png" alt="" class="w-75">
+                                </div>
+                                <div class="main__product-item-hover">
+                                    Đặt Ngay
+                                </div>
+                            </div>
+                            <div class="my-4">
+                                <h4 class="text-uppercase main__product-item-heading text-decoration-none fz-ex-18px">
+                                    Bánh kem trà
+                                    xanh 12cm</h4>
+                                <p class="fs-3 text-decoration-none text-secondary">250.000đ</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <a href="#" class="text-decoration-none">
+                            <div class="main__product-item p-5 position-relative">
+                                <div class="w-100">
+                                    <img src="./public/images/sp1.png" alt="" class="w-75">
+                                </div>
+                                <div class="main__product-item-hover">
+                                    Đặt Ngay
+                                </div>
+                            </div>
+                            <div class="my-4">
+                                <h4 class="text-uppercase main__product-item-heading text-decoration-none fz-ex-18px">
+                                    Bánh kem trà
+                                    xanh 12cm</h4>
+                                <p class="fs-3 text-decoration-none text-secondary">250.000đ</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="pagi mt-5 pt-5">
+                    <div class="d-flex justify-content-center gap-4">
+                        <span class="fs-3 fw-medium bg-white p-2 pagi-item">
+                            Trang Trước
+                        </span>
+                        <span class="fs-3 fw-medium p-2 pagi-item pagi-item--bg-color">
+                            Trang Kế Tiếp
+                        </span>
+                    </div>
+                    <div class="text-center mt-5">
+                        <ul class="pagination pagination-lg justify-content-center">
+                            <li class="page-item"><a class="page-link fs-4 pagi-item--bg-color" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link fs-4 text-dark" href="#">3</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog d-flex align-items-center" style="height: 500px;">
+            <div class="modal-content bg-transparent border-0">
+                <button type="button" class="bg-transparent border-0 text-end mb-4" data-bs-dismiss="modal">
+                    <i class="fa-solid fa-circle-xmark text-white fs-1"></i>
+                </button>
+                <div>
+                    <input type="text" placeholder="Search..." class="fs-4 p-3 w-100 rounded-5">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer ">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h3 class="footer__heading">Contact</h3>
+                    <h5 class="fs-3 fw-bolder d-flex align-items-center">
+                        <div style="width: 30px;">
+                            <img src="./public/images/mini-logo.png" alt="" class="w-100 h-100">
+                        </div>
+                        Restaurant
+                    </h5>
+                    <p>
+                        <i class="fa-solid fa-phone fs-4"></i>
+                        0707155999
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-location-dot fs-4"></i>
+                        Số 2, đường số 18, KDC Vạn Phúc, P. Hiệp Bình Phước, TP. Thủ Đức, TP. HCM
+                    </p>
+                    <h5 class="fs-3 fw-bolder d-flex align-items-center">
+                        <div style="width: 30px;">
+                            <img src="./public/images/mini-logo.png" alt="" class="w-100 h-100">
+                        </div>
+                        Bakery
+                    </h5>
+                    <p>
+                        <i class="fa-solid fa-phone fs-4"></i>
+                        0707133999
+                    </p>
+                    <p>
+                        <span class="d-block mb-4">
+                            <i class="fa-solid fa-location-dot fs-4"></i>
+                            127 Đồng Đen, P.12, Quận Tân Bình, TP. HCM
+                        </span>
+                        <span class="d-block mb-4">
+                            <i class="fa-solid fa-location-dot fs-4"></i>
+                            86 Vĩnh Viễn, P.2, Quận 10. TP. HCM
+                        </span>
+                        <span class="d-block">
+                            <i class="fa-solid fa-location-dot fs-4"></i>
+                            168 Khánh Hội, P.6, Quận 4
+                        </span>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="footer__heading">GET SUGARY LETTERS</h3>
+                    <h5 class="fs-3 fw-bolder">Policy</h5>
+                    <p><a href="#" class="text-decoration-none" style="color: #9d573c;">1. CHÍNH SÁCH ĐỔI TRẢ SẢN
+                            PHẨM</a></p>
+                    <p><a href="#" class="text-decoration-none" style="color: #9d573c;">2. CHÍNH SÁCH BẢO MẬ</a></p>
+                    <p><a href="#" class="text-decoration-none" style="color: #9d573c;">3. CHÍNH SÁCH VẬN CHUYỂN</a></p>
+                    <p><a href="#" class="text-decoration-none" style="color: #9d573c;">4. CHÍNH SÁCH KIỂM HÀNG</a></p>
+                    <p><a href="#" class="text-decoration-none" style="color: #9d573c;">5. CHÍNH SÁCH THANH TOÁN</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="footer__heading">OUR PRODUCT</h3>
+                    <h5 class="fs-3 fw-bolder">Bakery Store</h5>
+                    <p>Công ty TNHH SUGAR TOWN GPKD số 0316713744 cấp ngày 09/02/2021 tại Sở Kế hoạch và Đầu tư Tp. Hồ
+                        Chí Minh</p>
+                    <p>Email:ciao@sugartown.vn Website:https://www.sugartown.vn/</p>
+                </div>
+            </div>
+        </div>
+        <div class="py-5" style="background-color: #9d573c;">
+            <div class="container">
+                <h4 class="text-center fs-4 m-0 text-white">2021 SUGAR TOWN All right reserved</h4>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="./public/js/bootstrap.bundle.min.js"></script>
+    <script src="./public/fontawesome-free-6.6.0-web/js/all.min.js"></script>
+    <script src="./public/js/app.js"></script>
+    <!-- <script type="text/javascript">
+        var message = ""; function clickIE() { if (document.all) { (message); return false; } } function clickNS(e) { if (document.layers || (document.getElementById && !document.all)) { if (e.which == 2 || e.which == 3) { (message); return false; } } } if (document.layers) { document.captureEvents(Event.MOUSEDOWN); document.onmousedown = clickNS; } else { document.onmouseup = clickNS; document.oncontextmenu = clickIE; document.onselectstart = clickIE } document.oncontextmenu = new Function("return false")
+    </script> -->
+</body>
+
+</html>

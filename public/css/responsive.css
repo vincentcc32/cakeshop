@@ -1,0 +1,34 @@
+/* Pc >=1024 Table>=740 & < 1024px Mobile: <740px */
+
+/* pc */
+@media (min-width: 1024px) {}
+
+/* ipad */
+
+@media (min-width: 740px) and (max-width: 1023px) {}
+
+/* mobile */
+
+@media (max-width:769px) {
+    .w-md-100 {
+        width: 100% !important;
+    }
+
+
+    .footer {
+        margin-top: 50px;
+        padding-top: 50px;
+        background-color: var(--footer-bg-color);
+    }
+
+}
+
+@media (max-width:576px) {
+    .fz-ex-18px {
+        font-size: 18px;
+    }
+}
+
+/* ipad mobile  */
+
+@media (max-width: 1023px) {}
