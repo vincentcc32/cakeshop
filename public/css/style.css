@@ -368,3 +368,27 @@ body {
     background-color: var(--while-color);
     transition: all .3s ease;
 }
+
+/* story */
+
+.main__story__banner1,
+.main__story__banner2,
+.main__story__banner3 {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.main__story__banner1 {
+    background-image: url(../images/cauchuyen1.png);
+    min-height: 1174px;
+}
+
+.main__story__banner2 {
+    background-image: url(../images/cauchuyen2.png);
+    min-height: 1457px;
+}
+
+.main__story__banner3 {
+    background-image: url(../images/cauchuyen3.png);
+    min-height: 1687px;
+}

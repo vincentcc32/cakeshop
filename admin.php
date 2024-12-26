@@ -26,8 +26,8 @@ if (isset($_SESSION['user']) && $_SESSION['user']['Quyen'] == 1) {
         header('Location: admin.php?ctrl=page&view=dashboard');
     }
 } else {
-    include_once "./views/templates/admin/head.php";
-    include_once "./views/templates/admin/header.php";
+    include_once "./views/templates/head.php";
+    include_once "./views/templates/header.php";
     include_once "./views/View404.php";
-    include_once "./views/templates/admin/footer.php";
+    include_once "./views/templates/footer.php";
 }

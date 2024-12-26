@@ -164,8 +164,43 @@
                     </div>
                 </div>
             </div>
+            <div class="detail__randProduct" style="padding-top: 50px;">
+                <h2 class="text-uppercase fs-1 color-primary pb-5">Sản phẩm liên quan</h2>
+                <div class="row gy-5 gx-4 mb-5 py-5">
+                    <?php if (!empty($randProduct)): ?>
+                        <?php foreach ($randProduct as $sp) : ?>
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <a href="index.php?ctrl=product&view=detail&category=<?= $sp['MaDanhMuc'] ?>&id=<?= $sp['MaSanPham'] ?>" class="text-decoration-none">
+                                    <div class="main__product-item p-5 position-relative">
+                                        <div class="w-100">
+                                            <img src="./public/images/<?= $sp['Anh'] ?>" alt="" class="w-75">
+                                        </div>
+                                        <div class="main__product-item-hover">
+                                            Đặt Ngay
+                                        </div>
+                                    </div>
+                                    <div class="my-4">
+                                        <h4 class="text-uppercase main__product-item-heading text-decoration-none fz-ex-18px"><?= $sp['TenSanPham'] ?></h4>
+                                        <?php if (empty($sp['GiaGiam'])): ?>
+                                            <p class="fs-3 text-decoration-none text-secondary"><?= number_format($sp['Gia']) . 'đ' ?></p>
+                                        <?php else: ?>
+                                            <div class="d-flex gap-3">
+                                                <p class="fs-3 text-decoration-line-through text-secondary"><?= number_format($sp['Gia']) . 'đ' ?></p>
+                                                <p class="fs-3 text-decoration-none text-secondary"><?= number_format($sp['GiaGiam']) . 'đ' ?></p>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="w-100">
+                            <img src="./public/images/empty.jpg" alt="" class="w-100 h-100">
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
-    </div>
     </div>
 </main>
 

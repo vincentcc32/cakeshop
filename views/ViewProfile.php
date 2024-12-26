@@ -27,7 +27,7 @@
                                     <img class="img-account-profile rounded-circle mb-2" src="./public/images/<?= empty($user['AnhDaiDien']) ? 'avatar.png' : $user['AnhDaiDien'] ?>" alt="">
 
                                     <label for="inputavt" class="fs-5 btn btn-primary d-inline-block my-3" style="width: 140px;">Tải lên hình ảnh mới</label>
-                                    <input type="file" id="inputavt" accept="" name="avt" hidden>
+                                    <input type="file" id="inputavt" accept="image/*" name="avt" accept="image/*" hidden>
                                 </div>
                             </div>
                         </div>
@@ -93,12 +93,13 @@
                                 <div class="col-md-11">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="pull-right"><label class=" fs-3 label label-danger"><?= $item['TinhTrang'] === 0 ? 'Chưa xác nhận' : ($item['TinhTrang'] === 1 ? 'Đang giao' : 'Đã giao hàng') ?></label></div>
+                                            <div class="pull-right"><label class=" fs-3 label label-danger <?= $item['TinhTrang'] === 0 ? 'text-danger' : ($item['TinhTrang'] === 1 ? 'text-primary' : 'text-success') ?>"><?= $item['TinhTrang'] === 0 ? 'Chưa xác nhận' : ($item['TinhTrang'] === 1 ? 'Đang giao' : 'Đã giao hàng') ?></label></div>
                                             <span class="fs-4"><strong>Tên sản phẩm: </strong></span> <span class="fs-4 label label-info"><?= $item['TenSanPham'] ?></span><br />
                                             <span class="fs-4">Số lượng : <?= $item['SoLuongMua'] ?>, Giá: <?= number_format($item['ThanhTien']) . 'đ' ?></span> <br />
                                             <?= $item['TinhTrang'] === 0 ? '<span class="btn-delete"><a data-placement="top" class="btn btn-danger fs-4 fa-solid fa-trash" title="Danger"></a></span>' : '' ?>
                                         </div>
                                         <div class="col-md-12 fs-4">Thời gian đặt: <?= $item['ThoiGianDatHang'] ?></div>
+                                        <div class="col-md-12 fs-4 text-danger">Thời gian Nhận dự kiến: <?= date("Y-m-d H:i:s", strtotime("+1 hour",  strtotime($item['ThoiGianDatHang'])))  ?></div>
                                     </div>
                                 </div>
                             </div>

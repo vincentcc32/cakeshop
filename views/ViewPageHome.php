@@ -10,7 +10,7 @@
                     <?php if (isset($dssm)): ?>
                         <?php foreach ($dssm as $dm) : ?>
                             <a href="index.php?ctrl=product&view=category&id=<?= $dm['MaDanhMuc'] ?>" class="col-sm-6 d-block position-relative main_home-category-item overflow-hidden">
-                                <img src="./public/images/<?= $dm['AnhDanhMuc'] ?>" alt="" style="width: 25rem;" class="object-fit-cover">
+                                <img src="./public/images/<?= $dm['AnhDanhMuc'] ?>" alt="" style="width: 25rem; border-top-left-radius: 50%; border-top-right-radius: 50%;" class="object-fit-cover">
                                 <span class="bg-white fw-bolder position-absolute main__home-category-item-heading"><?= $dm['TenDanhMuc'] ?></span>
                             </a>
                         <?php endforeach; ?>

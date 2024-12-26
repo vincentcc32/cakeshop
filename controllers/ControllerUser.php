@@ -151,10 +151,10 @@ if (isset($_GET['view'])) {
                     }
                 }
             } else {
-                include_once "./views/templates/admin/head.php";
-                include_once "./views/templates/admin/header.php";
+                include_once "./views/templates/head.php";
+                include_once "./views/templates/header.php";
                 include_once "./views/View404.php";
-                include_once "./views/templates/admin/footer.php";
+                include_once "./views/templates/footer.php";
                 exit;
             }
 
@@ -169,23 +169,72 @@ if (isset($_GET['view'])) {
                 unset($_SESSION['user']);
                 header("Location: index.php?ctrl=user&view=login");
             } else {
-                include_once "./views/templates/admin/head.php";
-                include_once "./views/templates/admin/header.php";
+                include_once "./views/templates/head.php";
+                include_once "./views/templates/header.php";
                 include_once "./views/View404.php";
-                include_once "./views/templates/admin/footer.php";
+                include_once "./views/templates/footer.php";
                 exit;
             }
             break;
+        case 'forgotpassword':
+
+            // models
+            include_once "./models/phpmailer.php";
+            include_once "./models/ModelUser.php";
+
+            if (isset($_GET['action']) && $_GET['action'] === 'sendcode' && isset($_GET['email'])) {
+                $email = htmlspecialchars($_GET['email'], ENT_QUOTES);
+                if (checkEmail($email)) {
+                    $code = rand(1000, 9999);
+                    $_SESSION['code'] = $code;
+                    codeForgotPassword($email, $code);
+                    exit;
+                }
+            }
+
+            if (isset($_POST['changepass'])) {
+                $emailInput = htmlspecialchars($_POST['email'], ENT_QUOTES);
+                $passInput = htmlspecialchars($_POST['pass'], ENT_QUOTES);
+                $codeInput = (int) htmlspecialchars($_POST['code'], ENT_QUOTES);
+                if ($codeInput === $_SESSION['code']) {
+                    $check = checkEmail($emailInput);
+                    if ($check) {
+                        $hashed_password = password_hash($passInput, PASSWORD_DEFAULT);
+                        changePass($hashed_password, $emailInput);
+                        unset($_SESSION['code']);
+                        header("Location: index.php?ctrl=user&view=login");
+                        exit;
+                    } else {
+                        unset($_SESSION['code']);
+                        $_SESSION['mess'] = 'Email không tồn tại!';
+                        header("Location: index.php?ctrl=user&view=forgotpassword");
+                        exit;
+                    }
+                } else {
+                    $_SESSION['mess'] = 'Mã không chính xác!';
+                    header("Location: index.php?ctrl=user&view=forgotpassword");
+                    exit;
+                }
+            }
+
+
+            // view
+            include_once "./views/templates/head.php";
+            include_once "./views/templates/header.php";
+            include_once "./views/ViewForgotPassword.php";
+            include_once "./views/templates/footer.php";
+
+            break;
         default:
-            include_once "./views/templates/admin/head.php";
-            include_once "./views/templates/admin/header.php";
+            include_once "./views/templates/head.php";
+            include_once "./views/templates/header.php";
             include_once "./views/View404.php";
-            include_once "./views/templates/admin/footer.php";
+            include_once "./views/templates/footer.php";
             break;
     }
 } else {
-    include_once "./views/templates/admin/head.php";
-    include_once "./views/templates/admin/header.php";
+    include_once "./views/templates/head.php";
+    include_once "./views/templates/header.php";
     include_once "./views/View404.php";
-    include_once "./views/templates/admin/footer.php";
+    include_once "./views/templates/footer.php";
 }

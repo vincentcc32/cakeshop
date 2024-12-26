@@ -8,19 +8,26 @@ if (isset($_GET['view'])) {
 
             if (isset($_GET['id'])) {
                 $id = (int)htmlspecialchars($_GET['id'], ENT_QUOTES);
-                $spById = getProductByCate($id);
-                $tenDm = getCateByID($id);
+                if (checkCate($id)) {
+                    $spById = getProductByCate($id);
+                    $tenDm = getCateByID($id);
 
-                $sl = floor(getAllProductInCate($id)['SL'] / 12);
-                if (isset($_GET['page'])) {
-                    $page = (int)htmlspecialchars($_GET['id'], ENT_QUOTES);
-                    $spById = getProductByCate($id, $page * 12);
+                    $sl = floor(getAllProductInCate($id)['SL'] / 12);
+                    if (isset($_GET['page'])) {
+                        $page = (int)htmlspecialchars($_GET['id'], ENT_QUOTES);
+                        $spById = getProductByCate($id, $page * 12);
+                    }
+                } else {
+                    include_once "./views/templates/head.php";
+                    include_once "./views/templates/header.php";
+                    include_once "./views/View404.php";
+                    include_once "./views/templates/footer.php";
                 }
             } else {
-                include_once "./views/templates/admin/head.php";
-                include_once "./views/templates/admin/header.php";
+                include_once "./views/templates/head.php";
+                include_once "./views/templates/header.php";
                 include_once "./views/View404.php";
-                include_once "./views/templates/admin/footer.php";
+                include_once "./views/templates/footer.php";
                 exit;
             }
 
@@ -80,17 +87,26 @@ if (isset($_GET['view'])) {
 
             if (isset($_GET['id']) && isset($_GET['category']) && !empty($_GET['id']) && !empty($_GET['category'])) {
                 $id = (int) htmlspecialchars($_GET['id'], ENT_QUOTES);
-                $sp = getProductByID($id);
                 $cate = (int)htmlspecialchars($_GET['category'], ENT_QUOTES);
+                if (checkMaSpAndCate($id, $cate)) {
+                    $sp = getProductByID($id);
+                    $bl = getAllCmt($id);
 
-                $bl = getAllCmt($id);
+                    $rating = getRating($id);
 
-                $rating = getRating($id);
+                    $randProduct = randProduct();
+                } else {
+                    include_once "./views/templates/head.php";
+                    include_once "./views/templates/header.php";
+                    include_once "./views/View404.php";
+                    include_once "./views/templates/footer.php";
+                    exit;
+                }
             } else {
-                include_once "./views/templates/admin/head.php";
-                include_once "./views/templates/admin/header.php";
+                include_once "./views/templates/head.php";
+                include_once "./views/templates/header.php";
                 include_once "./views/View404.php";
-                include_once "./views/templates/admin/footer.php";
+                include_once "./views/templates/footer.php";
                 exit;
             }
 
@@ -174,10 +190,10 @@ if (isset($_GET['view'])) {
                 $sp = search($key);
                 $quantity = searchQuantity($key)['SL'];
             } else {
-                include_once "./views/templates/admin/head.php";
-                include_once "./views/templates/admin/header.php";
+                include_once "./views/templates/head.php";
+                include_once "./views/templates/header.php";
                 include_once "./views/View404.php";
-                include_once "./views/templates/admin/footer.php";
+                include_once "./views/templates/footer.php";
                 exit;
             }
 
@@ -190,6 +206,8 @@ if (isset($_GET['view'])) {
         case 'checkout':
             // model
             include_once "./models/ModelProduct.php";
+            include_once "./models/phpmailer.php";
+
             if (isset($_POST['dathang'])) {
                 if (isset($_SESSION['cart'])) {
                     $hoTen = htmlspecialchars($_POST['ten'], ENT_QUOTES);
@@ -232,6 +250,7 @@ if (isset($_GET['view'])) {
                     }
                     if (isset($check) && $check) {
                         unset($_SESSION['cart']);
+                        thankBuyStore($_SESSION['user']['Email']);
                         header("Location: index.php?ctrl=user&view=profile");
                         exit;
                     } else {
@@ -246,15 +265,15 @@ if (isset($_GET['view'])) {
             include_once "./views/templates/footer.php";
             break;
         default:
-            include_once "./views/templates/admin/head.php";
-            include_once "./views/templates/admin/header.php";
+            include_once "./views/templates/head.php";
+            include_once "./views/templates/header.php";
             include_once "./views/View404.php";
-            include_once "./views/templates/admin/footer.php";
+            include_once "./views/templates/footer.php";
             break;
     }
 } else {
-    include_once "./views/templates/admin/head.php";
-    include_once "./views/templates/admin/header.php";
+    include_once "./views/templates/head.php";
+    include_once "./views/templates/header.php";
     include_once "./views/View404.php";
-    include_once "./views/templates/admin/footer.php";
+    include_once "./views/templates/footer.php";
 }

@@ -63,8 +63,8 @@
                                             <div class="col-md-11">
                                                 <div class="row">
                                                     <div class="col-md-12 d-flex align-items-start flex-column gap-2">
-                                                        <div class="pull-right"><label class=" fs-3 label label-danger text-status"><?= $item['TinhTrang'] === 0 ? 'Chưa xác nhận' : ($item['TinhTrang'] === 1 ? 'Đang giao' : 'Đã giao hàng') ?></label></div>
-                                                        <span class="fs-4"><strong>Trạng thái: </strong> <span class="trangthai fs-4 label label-info"><?= $item['TrangThai'] ? 'Đã thanh toán' : 'Chưa thanh toán' ?></span></span>
+                                                        <div class="pull-right"><label class=" fs-3 label label-danger text-status  <?= $item['TinhTrang'] === 0 ? 'text-danger' : ($item['TinhTrang'] === 1 ? 'text-primary' : 'text-success') ?>"><?= $item['TinhTrang'] === 0 ? 'Chưa xác nhận' : ($item['TinhTrang'] === 1 ? 'Đang giao' : 'Đã giao hàng') ?></label></div>
+                                                        <span class="fs-4"><strong>Trạng thái: </strong> <span class="trangthai fs-4 label label-info <?= $item['TrangThai'] ? 'text-success' : 'text-danger' ?>"><?= $item['TrangThai'] ? 'Đã thanh toán' : 'Chưa thanh toán' ?></span></span>
                                                         <span class="fs-4">Thành tiền hóa đơn : <?= number_format($item['ThanhTienHoaDon']) . 'đ' ?>, Phí vận chuyển: <?= number_format($item['PhiVanChuyen']) . 'đ' ?>, Tổng tiền: <?= number_format($item['TongTienHoaDon']) . 'đ' ?></span>
                                                     </div>
                                                     <div class="col-md-12 fs-4 d-flex justify-content-start mt-2">Thời gian đặt: <?= $item['ThoiGianDatHang'] ?></div>
@@ -76,9 +76,9 @@
                                 <div class="action-list col-12 col-sm-3 d-flex justifi-content-center gap-5 align-items-center">
                                     <div class="fs-3 btn-group">
                                         <?php if ($item['TinhTrang'] === 0): ?>
-                                            <button class="btn btn-primary fs-3 xacnhan">xác nhận</button>
+                                            <button class="btn btn-primary text-bg-danger fs-3 xacnhan">xác nhận</button>
                                         <?php elseif ($item['TinhTrang'] === 1): ?>
-                                            <button class="btn btn-primary fs-3 dagiaohang">Đã giao hàng</button>
+                                            <button class="btn btn-primary text-primary fs-3 dagiaohang">Đã giao hàng</button>
                                         <?php else: ?>
                                             <p class="fs-3 text-success d-inline-block">Xong</p>
                                         <?php endif; ?>

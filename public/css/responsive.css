@@ -21,6 +21,21 @@
         background-color: var(--footer-bg-color);
     }
 
+    .main__story__banner1 {
+        background-image: url(../images/cauchuyen1-mobile.png);
+        min-height: 1185px;
+    }
+
+    .main__story__banner2 {
+        background-image: url(../images/cauchuyen2-mobile.png);
+        min-height: 938px;
+    }
+
+    .main__story__banner3 {
+        background-image: url(../images/cauchuyen3-mobile.png);
+        min-height: 1459px;
+    }
+
 }
 
 @media (max-width:576px) {

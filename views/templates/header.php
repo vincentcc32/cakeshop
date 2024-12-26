@@ -31,12 +31,12 @@
                                 Trang Chủ</a>
                         </li>
                         <li class="p-2" style="border-bottom: 1px solid #9e553b;">
-                            <a href="#" class="fs-4 text-decoration-none text-black d-block">
+                            <a href="index.php?ctrl=page&view=story" class="fs-4 text-decoration-none text-black d-block">
                                 <img src="./public/images/cauchuyen.png" alt="" style="width: 3rem;">
                                 Câu Chuyện Thương Hiệu</a>
                         </li>
                         <li class="p-2" style="border-bottom: 1px solid #9e553b;">
-                            <a href="#" class="fs-4 text-decoration-none text-black d-block">
+                            <a href="index.php?ctrl=page&view=contact" class="fs-4 text-decoration-none text-black d-block">
                                 <img src="./public/images/lienhe.png" alt="" style="width: 3rem;">
                                 Liên Hệ</a>
                         </li>

@@ -29,11 +29,11 @@
                     endif; ?>
                     <!-- Submit button -->
                     <button name="register" type="submit" data-mdb-button-init data-mdb-ripple-init
-                        class="btn btn-primary btn-block mb-4 fs-4 px-4 py-2 register">Register</button>
+                        class="btn btn-primary btn-block mb-4 fs-4 px-4 py-2 register">Đăng ký</button>
 
                     <!-- Register buttons -->
                     <div class="text-center">
-                        <p class="fs-4">already have an account? <a href="index.php?ctrl=user&view=login">Login</a></p>
+                        <p class="fs-4">Đã có tài khoản? <a href="index.php?ctrl=user&view=login">Đăng nhập</a></p>
                     </div>
                 </form>
             </div>

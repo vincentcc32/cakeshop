@@ -23,7 +23,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['Quyen'] == 0) {
                 break;
         }
     } else {
-        header('Location: ?ctrl=page&view=home');
+        header('Location: index.php?ctrl=page&view=home');
     }
 } else {
     include_once "./views/templates/admin/head.php";

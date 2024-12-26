@@ -228,7 +228,6 @@
         const sdtInput = document.querySelector('input[name="sdt"]');
         sdtInput.onchange = (e) => {
             if (e.target.value.length != 10 || e.target.value[0] != 0) {
-                console.log(e.target.value[0]);
                 alert('Số điện thoại không hợp lệ!');
                 document.querySelector('button[type="submit"]').disabled = true;
             } else {

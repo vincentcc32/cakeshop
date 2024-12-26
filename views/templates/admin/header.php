@@ -5,7 +5,7 @@
             </div>
             <div class="col-4 d-flex justify-content-center">
                 <div class="header__logo">
-                    <a href="admin.php?ctrl=page&view=dashboard" class="d-block w-100 text-center">
+                    <a href="admin.php" class="d-block w-100 text-center">
                         <img src="./public/images/logo.png" alt="" class="w-100 h-100">
                     </a>
                 </div>

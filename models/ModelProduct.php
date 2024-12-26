@@ -451,3 +451,42 @@ function getQuantityProduct()
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
     return $stmt->fetch();
 }
+
+function randProduct()
+{
+    global $conn;
+    $sql = "SELECT * FROM SANPHAM ORDER BY RAND() LIMIT 4";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll();
+}
+
+function checkMaSpAndCate($maSP, $cate)
+{
+    global $conn;
+    $sql = "SELECT * FROM `SANPHAM` where MaSanPham = :MaSanPham and MaDanhMuc = :MaDanhMuc";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MaSanPham", $maSP, PDO::PARAM_INT);
+    $stmt->bindValue(":MaDanhMuc", $cate, PDO::PARAM_INT);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function checkCate($cate)
+{
+    global $conn;
+    $sql = "SELECT * FROM `DANHMUC` where MaDanhMuc = :MaDanhMuc";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MaDanhMuc", $cate, PDO::PARAM_INT);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -12,7 +12,7 @@
                     <!-- Password input -->
                     <div data-mdb-input-init class="form-outline mb-4">
                         <input required name="pass" type="password" id="form2Example2" class="form-control py-2 fs-4 px-2" />
-                        <label class="form-label fs-4" for="form2Example2">Password</label>
+                        <label class="form-label fs-4" for="form2Example2">Mật khẩu</label>
                     </div>
 
                     <!-- 2 column grid layout for inline styling -->
@@ -20,7 +20,7 @@
 
                         <div class="col">
                             <!-- Simple link -->
-                            <a href="#!" class="fs-4">Forgot password?</a>
+                            <a href="index.php?ctrl=user&view=forgotpassword" class="fs-4">Quên mật khẩu?</a>
                         </div>
                     </div>
                     <?php if (isset($_SESSION['mess'])): ?>
@@ -29,11 +29,11 @@
                     endif; ?>
                     <!-- Submit button -->
                     <button name="login" type="submit" data-mdb-button-init data-mdb-ripple-init
-                        class="btn btn-primary btn-block mb-4 fs-4 px-4 py-2">Sign in</button>
+                        class="btn btn-primary btn-block mb-4 fs-4 px-4 py-2">Đăng nhập</button>
 
                     <!-- Register buttons -->
                     <div class="text-center">
-                        <p class="fs-4">Not a member? <a href="index.php?ctrl=user&view=register">Register</a></p>
+                        <p class="fs-4">Chưa có tài khoản? <a href="index.php?ctrl=user&view=register">Đăng ký</a></p>
                     </div>
                 </form>
             </div>

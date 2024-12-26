@@ -11,11 +11,11 @@
                 </h5>
                 <p>
                     <i class="fa-solid fa-phone fs-4"></i>
-                    0707155999
+                    0789475518
                 </p>
                 <p>
                     <i class="fa-solid fa-location-dot fs-4"></i>
-                    Số 2, đường số 18, KDC Vạn Phúc, P. Hiệp Bình Phước, TP. Thủ Đức, TP. HCM
+                    Số 601 Phong Bắc 2b Cẩm Lệ Đà Nẵng đường Trần Quý 2
                 </p>
                 <h5 class="fs-3 fw-bolder d-flex align-items-center">
                     <div style="width: 30px;">
@@ -25,20 +25,20 @@
                 </h5>
                 <p>
                     <i class="fa-solid fa-phone fs-4"></i>
-                    0707133999
+                    0366409378
                 </p>
                 <p>
                     <span class="d-block mb-4">
                         <i class="fa-solid fa-location-dot fs-4"></i>
-                        127 Đồng Đen, P.12, Quận Tân Bình, TP. HCM
+                        Số 597 núi Thành Đà Nẵng
                     </span>
                     <span class="d-block mb-4">
                         <i class="fa-solid fa-location-dot fs-4"></i>
-                        86 Vĩnh Viễn, P.2, Quận 10. TP. HCM
+                        213 Trường Chinh Đà Nẵng
                     </span>
                     <span class="d-block">
                         <i class="fa-solid fa-location-dot fs-4"></i>
-                        168 Khánh Hội, P.6, Quận 4
+                        73 Hà Huy Tập Đà Nẵng
                     </span>
                 </p>
             </div>
@@ -55,15 +55,14 @@
             <div class="col-md-4">
                 <h3 class="footer__heading">OUR PRODUCT</h3>
                 <h5 class="fs-3 fw-bolder">Bakery Store</h5>
-                <p>Công ty TNHH SUGAR TOWN GPKD số 0316713744 cấp ngày 09/02/2021 tại Sở Kế hoạch và Đầu tư Tp. Hồ
-                    Chí Minh</p>
-                <p>Email:ciao@sugartown.vn Website:https://www.sugartown.vn/</p>
+                <p>Công ty TNHH Cake Shop GPKD số 0316713744 cấp ngày 09/02/2021 tại Sở Kế hoạch và Đầu tư Tp. Đà Nẵng</p>
+                <p>Email:cakeshop@gmail.vn Website:https://www.cakeshop.vn/</p>
             </div>
         </div>
     </div>
     <div class="py-5" style="background-color: #9d573c;">
         <div class="container">
-            <h4 class="text-center fs-4 m-0 text-white">2021 SUGAR TOWN All right reserved</h4>
+            <h4 class="text-center fs-4 m-0 text-white">2021 CAKE SHOP All right reserved</h4>
         </div>
     </div>
 </footer>

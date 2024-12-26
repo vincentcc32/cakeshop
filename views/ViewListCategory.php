@@ -72,7 +72,7 @@
                 <form action="" method="post" class="fs-4" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="productName" class="form-label">Ảnh Danh Mục</label>
-                        <input name="anh" class="fs-4 d-block w-100 p-2" type="file" required>
+                        <input name="anh" class="fs-4 d-block w-100 p-2" type="file" accept="image/*" required>
                     </div>
 
                     <div class="mb-3">
@@ -105,7 +105,7 @@
                         <div class="mb-3">
                             <img src="./public/images/sp1.png" class="edit-anh" alt="" style="min-width: 40px; max-width: 40px; min-height:40px ; max-height: 40px;">
                             <label for="productName" class="form-label">Ảnh Danh Mục</label>
-                            <input name="anh" class="fs-4 d-block w-100 p-2" type="file">
+                            <input name="anh" class="fs-4 d-block w-100 p-2" type="file" accept="image/*">
                         </div>
 
                         <div class="mb-3">

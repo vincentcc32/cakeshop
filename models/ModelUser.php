@@ -70,3 +70,13 @@ function updateAvt($id, $avt)
     $stmt->bindValue(":MaTaiKhoan", $id, PDO::PARAM_INT);
     return $stmt->execute();
 }
+
+function changePass($pass, $email)
+{
+    global $conn;
+    $sql = "UPDATE TAIKHOAN SET MatKhau = :MatKhau WHERE Email = :Email";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MatKhau", $pass, PDO::PARAM_STR);
+    $stmt->bindValue(":Email", $email, PDO::PARAM_STR);
+    return $stmt->execute();
+}
