@@ -3,7 +3,7 @@
         <div class="row gy-4">
             <?php if (isset($_SESSION['cart'])): ?>
                 <div class="col-lg-8 overflow-x-auto mb-5">
-                    <h2 class="text-center fs-1 font-cursive mb-5">Giỏ hàng của tôi (<?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?>)</h2>
+                    <h2 class="text-center fs-1 font-cursive mb-5">Giỏ hàng của tôi (<span class="quantity-cart"><?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?></span>)</h2>
                     <table class="d-block fs-3 w-100" style="min-width: 600px;">
                         <thead class="w-100">
                             <tr class="bg-white" style="border-bottom: 1px solid #000 ;border-top: 1px solid #000 ;">
@@ -64,7 +64,7 @@
                                 Thông
                                 tin đơn hàng</h2>
                             <div class="py-4" style="border-bottom: 1px solid #000">
-                                <h3 class="fs-4">Các món giao ngay (<?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?>)</h3>
+                                <h3 class="fs-4">Các món giao ngay (<span class="quantity-cart-1"><?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?></span>)</h3>
                             </div>
                             <div style="border-bottom: 1px solid #000">
                                 <div class="d-flex justify-content-between">
@@ -73,12 +73,12 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fs-4 py-2">Phí vận chuyển:</h4>
-                                    <h4 class="fs-4 py-2">30,000 đ</h4>
+                                    <h4 class="fs-4 py-2">15,000 đ</h4>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between pt-4">
                                 <h3 class="fs-4 py-2">Tổng tiền thanh toán:</h3>
-                                <h3 class="fs-4 py-2 sum-total"><?= number_format($sumMoneyCart + 30000) ?>đ</h3>
+                                <h3 class="fs-4 py-2 sum-total"><?= number_format($sumMoneyCart + 15000) ?>đ</h3>
                             </div>
                             <?php if (isset($_SESSION['user'])): ?>
                                 <a href="index.php?ctrl=product&view=checkout"
@@ -109,12 +109,6 @@
 <script>
     function addCart(sl, index) {
         const xmlhttp = new XMLHttpRequest();
-        xmlhttp.onload = function() {
-            const quantity = document.querySelector('.quantity-cart');
-
-            quantity.innerText = `(${this.responseText})`;
-
-        }
         xmlhttp.open("GET", `index.php?ctrl=product&view=cart&index=${index}&sl=${sl}`);
         xmlhttp.send();
     }
@@ -132,8 +126,8 @@
     const sumMoney = document.querySelectorAll('.sum-money');
     const total = document.querySelector('.total');
     const sumTotal = document.querySelector('.sum-total');
-    const deleteCartBtn = document.querySelectorAll('.delete-cart');
-    const tableRow = document.querySelectorAll('.table-row');
+    let deleteCartBtn = document.querySelectorAll('.delete-cart');
+    let tableRow = document.querySelectorAll('.table-row');
 
 
 
@@ -147,7 +141,7 @@
             sumMoney[i].setAttribute('data-sum-money', tien);
             total.innerText = (parseInt(total.getAttribute('data-total')) + parseInt(money[0].getAttribute('data-money'))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
             total.setAttribute('data-total', (parseInt(total.getAttribute('data-total')) + parseInt(money[0].getAttribute('data-money'))));
-            sumTotal.innerText = (parseInt(total.getAttribute('data-total')) + 30000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
+            sumTotal.innerText = (parseInt(total.getAttribute('data-total')) + 15000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
             addCart(quantity[i].innerText, quantity[i].getAttribute('data-id'));
         }
     }
@@ -162,7 +156,7 @@
                 sumMoney[i].setAttribute('data-sum-money', tien);
                 total.innerText = (parseInt(total.getAttribute('data-total')) - parseInt(money[0].getAttribute('data-money'))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
                 total.setAttribute('data-total', (parseInt(total.getAttribute('data-total')) - parseInt(money[0].getAttribute('data-money'))));
-                sumTotal.innerText = (parseInt(total.getAttribute('data-total')) + 30000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
+                sumTotal.innerText = (parseInt(total.getAttribute('data-total')) + 15000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
                 addCart(quantity[i].innerText, quantity[i].getAttribute('data-id'));
             }
         }
@@ -170,14 +164,29 @@
 
 
 
-    for (let i = 0; i < deleteCartBtn.length; i++) {
-        deleteCartBtn[i].onclick = () => {
-            total.innerText = (parseInt(total.getAttribute('data-total')) - parseInt(sumMoney[0].getAttribute('data-sum-money'))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
-            total.setAttribute('data-total', (parseInt(total.getAttribute('data-total')) - parseInt(sumMoney[0].getAttribute('data-sum-money'))));
-            sumTotal.innerText = (parseInt(total.getAttribute('data-total')) + 30000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
-            deleteCart(deleteCartBtn[i].getAttribute('data-delete'));
-            tableRow[i].remove();
+    deleteCartBtn.forEach((btn, index) => {
+        btn.onclick = () => {
+            const button = deleteCartBtn[index];
+            if (button) {
+                // Các thao tác xóa giỏ hàng như trên
+                const totalValue = parseInt(total.getAttribute('data-total'));
+                const itemTotal = parseInt(sumMoney[index].getAttribute('data-sum-money'));
+                const newTotal = totalValue - itemTotal;
+                total.innerText = newTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
+                total.setAttribute('data-total', newTotal);
 
-        }
-    }
+                const newSumTotal = newTotal + 15000;
+                sumTotal.innerText = newSumTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
+
+                deleteCart(button.getAttribute('data-delete'));
+
+                tableRow[index].remove();
+
+                // Cập nhật số lượng giỏ hàng
+                document.querySelector('.quantity-cart-1').textContent = parseInt(document.querySelector('.quantity-cart-1').textContent) - 1;
+                document.querySelector('.quantity-cart').textContent = parseInt(document.querySelector('.quantity-cart').textContent) - 1;
+                document.querySelector('.quantity-cart-header').textContent = parseInt(document.querySelector('.quantity-cart-header').textContent) - 1;
+            }
+        };
+    });
 </script>

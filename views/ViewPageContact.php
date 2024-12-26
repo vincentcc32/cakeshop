@@ -17,17 +17,17 @@
                 <div class="fs-4 text-secondary">
                     <div>
                         <p><em>- Restaurant:</em></p>
-                        <p><em>0707155999</em></p>
-                        <p><em>Số 2, Đường số 18, KDC Vạn Phúc, P. Hiệp Bình Phước, TP. Thủ Đức, TP. HCM </em></p>
+                        <p><em>0789475518</em></p>
+                        <p><em>Số 601 Phong Bắc 2b Cẩm Lệ Đà Nẵng đường Trần Quý 2 </em></p>
                     </div>
                     <div>
                         <p><em>- Bakery:</em></p>
-                        <p><em>0707133999</em></p>
-                        <p><em>127 Đồng Đen, P. 12, Tân Bình. TP. HCM </em></p>
-                        <p><em>86 Vĩnh Viễn, P.2, Quận 10. TP. HCM </em></p>
+                        <p><em>0366409378</em></p>
+                        <p><em>213 Trường Chinh Đà Nẵng</em></p>
+                        <p><em>73 Hà Huy Tập Đà Nẵng</em></p>
                     </div>
                     <div>
-                        <p><em>Email: <a href="mailto:ciao@cakeshop.vn">ciao@cakeshop.vn</a> </em></p>
+                        <p><em>Email: <a href="mailto:cakeshop@gmail.com">cakeshop@gmail.com</a> </em></p>
                         <p><em>Website: <a href="#">www.cakeshop.vn</a> </em></p>
                     </div>
                 </div>

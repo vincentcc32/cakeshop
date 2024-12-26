@@ -45,22 +45,22 @@
             <div class="col-md-4">
                 <h3 class="footer__heading">GET SUGARY LETTERS</h3>
                 <h5 class="fs-3 fw-bolder">Policy</h5>
-                <p><a href="#" class="text-decoration-none" style="color: #9d573c;">1. CHÍNH SÁCH ĐỔI TRẢ SẢN
+                <p><a href="#" class="text-decoration-none color-primary">1. CHÍNH SÁCH ĐỔI TRẢ SẢN
                         PHẨM</a></p>
-                <p><a href="#" class="text-decoration-none" style="color: #9d573c;">2. CHÍNH SÁCH BẢO MẬ</a></p>
-                <p><a href="#" class="text-decoration-none" style="color: #9d573c;">3. CHÍNH SÁCH VẬN CHUYỂN</a></p>
-                <p><a href="#" class="text-decoration-none" style="color: #9d573c;">4. CHÍNH SÁCH KIỂM HÀNG</a></p>
-                <p><a href="#" class="text-decoration-none" style="color: #9d573c;">5. CHÍNH SÁCH THANH TOÁN</a></p>
+                <p><a href="#" class="text-decoration-none color-primary">2. CHÍNH SÁCH BẢO MẬ</a></p>
+                <p><a href="#" class="text-decoration-none color-primary">3. CHÍNH SÁCH VẬN CHUYỂN</a></p>
+                <p><a href="#" class="text-decoration-none color-primary">4. CHÍNH SÁCH KIỂM HÀNG</a></p>
+                <p><a href="#" class="text-decoration-none color-primary">5. CHÍNH SÁCH THANH TOÁN</a></p>
             </div>
             <div class="col-md-4">
                 <h3 class="footer__heading">OUR PRODUCT</h3>
                 <h5 class="fs-3 fw-bolder">Bakery Store</h5>
                 <p>Công ty TNHH Cake Shop GPKD số 0316713744 cấp ngày 09/02/2021 tại Sở Kế hoạch và Đầu tư Tp. Đà Nẵng</p>
-                <p>Email:cakeshop@gmail.vn Website:https://www.cakeshop.vn/</p>
+                <p>Email:cakeshop@gmail.com Website:https://www.cakeshop.vn/</p>
             </div>
         </div>
     </div>
-    <div class="py-5" style="background-color: #9d573c;">
+    <div class="py-5 bg-footer">
         <div class="container">
             <h4 class="text-center fs-4 m-0 text-white">2021 CAKE SHOP All right reserved</h4>
         </div>
@@ -91,40 +91,41 @@
     </script> -->
 
 <script>
-    function convert(title) {
-        //Đổi chữ hoa thành chữ thường
-        slug = title.toLowerCase();
+    // không cần chuyển thành slug search bằng tiếng việt lun
 
-        //Đổi ký tự có dấu thành không dấu
-        slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
-        slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
-        slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
-        slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
-        slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
-        slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
-        slug = slug.replace(/đ/gi, 'd');
-        //Xóa các ký tự đặt biệt
-        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
-        //Đổi khoảng trắng thành ký tự gạch ngang
-        slug = slug.replace(/ /gi, "");
-        //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
-        //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
-        slug = slug.replace(/\-\-\-\-\-/gi, '-');
-        slug = slug.replace(/\-\-\-\-/gi, '-');
-        slug = slug.replace(/\-\-\-/gi, '-');
-        slug = slug.replace(/\-\-/gi, '-');
-        //Xóa các ký tự gạch ngang ở đầu và cuối
-        slug = '@' + slug + '@';
-        slug = slug.replace(/\@\-|\-\@|\@/gi, '');
-        return slug;
-    }
+    // function convert(title) {
+    //     //Đổi chữ hoa thành chữ thường
+    //     slug = title.toLowerCase();
+
+    //     //Đổi ký tự có dấu thành không dấu
+    //     slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+    //     slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+    //     slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+    //     slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+    //     slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+    //     slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+    //     slug = slug.replace(/đ/gi, 'd');
+    //     //Xóa các ký tự đặt biệt
+    //     slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+    //     //Đổi khoảng trắng thành ký tự gạch ngang
+    //     slug = slug.replace(/ /gi, "");
+    //     //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+    //     //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+    //     slug = slug.replace(/\-\-\-\-\-/gi, '-');
+    //     slug = slug.replace(/\-\-\-\-/gi, '-');
+    //     slug = slug.replace(/\-\-\-/gi, '-');
+    //     slug = slug.replace(/\-\-/gi, '-');
+    //     //Xóa các ký tự gạch ngang ở đầu và cuối
+    //     slug = '@' + slug + '@';
+    //     slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+    //     return slug;
+    // }
 
     searchInput = document.querySelector('.search-input');
 
     searchInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
-            let key = convert(searchInput.value);
-            window.location.href = `index.php?ctrl=product&view=search&key=${key}`;
+            window.location.href = `index.php?ctrl=product&view=search&key=${searchInput.value}`;
         }
 
     });

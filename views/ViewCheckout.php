@@ -117,7 +117,7 @@
                         <div class="col">
                             <div class="text-end mt-2 mt-sm-0">
                                 <button name="dathang" type="submit" class="btn btn-success fs-3">
-                                    <input type="hidden" name="vanchuyen" value="30000">
+                                    <input type="hidden" name="vanchuyen" value="15000">
                                     <i class="mdi mdi-cart-outline me-1"></i> Đặt hàng </button>
                             </div>
                         </div> <!-- end col -->
@@ -165,7 +165,7 @@
                                             <h5 class="fs-4 m-0">Tiền vận chuyển</h5>
                                         </td>
                                         <td class="fs-4">
-                                            30,000đ
+                                            15,000đ
                                         </td>
                                     </tr>
                                     <tr class="bg-light">
@@ -173,7 +173,7 @@
                                             <h5 class="fs-4 m-0">Tổng tiền:</h5>
                                         </td>
                                         <td class="fs-4">
-                                            <?= number_format($sum + 30000) . 'đ' ?>
+                                            <?= number_format($sum + 15000) . 'đ' ?>
                                         </td>
                                     </tr>
                                 </tbody>

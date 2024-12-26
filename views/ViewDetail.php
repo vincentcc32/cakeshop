@@ -222,9 +222,9 @@
     function addCart(sl, index) {
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.onload = function() {
-            const quantity = document.querySelector('.quantity-cart');
+            const quantity1 = document.querySelector('.quantity-cart-header');
 
-            quantity.innerText = `(${this.responseText})`;
+            quantity1.innerText = `${this.responseText}`;
 
         }
         xmlhttp.open("GET", `index.php?ctrl=product&view=detail&index=${index}&sl=${sl}`);

@@ -76,9 +76,9 @@
                                 <div class="action-list col-12 col-sm-3 d-flex justifi-content-center gap-5 align-items-center">
                                     <div class="fs-3 btn-group">
                                         <?php if ($item['TinhTrang'] === 0): ?>
-                                            <button class="btn btn-primary text-bg-danger fs-3 xacnhan">xác nhận</button>
+                                            <button class="btn btn-primary border-0 text-bg-danger fs-3 xacnhan">xác nhận</button>
                                         <?php elseif ($item['TinhTrang'] === 1): ?>
-                                            <button class="btn btn-primary text-primary fs-3 dagiaohang">Đã giao hàng</button>
+                                            <button class="btn btn-primary border-0 text-primary fs-3 dagiaohang">Đã giao hàng</button>
                                         <?php else: ?>
                                             <p class="fs-3 text-success d-inline-block">Xong</p>
                                         <?php endif; ?>
@@ -333,6 +333,7 @@
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.onload = function() {
             if (this.responseText === 'error') {
+                alert('Thất bại do đơn hàng đã bị hủy!');
                 window.location.reload();
             }
         }

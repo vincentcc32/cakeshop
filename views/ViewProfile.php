@@ -143,6 +143,7 @@
             if (this.responseText === 'success') {
                 alert('Sản phẩm đã được xóa thành công!');
             } else {
+                alert('Sản phẩm đã được shop xác nhận nên không thể xóa!');
                 window.location.reload();
             }
         }

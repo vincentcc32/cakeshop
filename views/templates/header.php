@@ -74,7 +74,7 @@
                 <div class="position-relative">
                     <a href="index.php?ctrl=product&view=cart" class="d-block header_icon-cart">
                         <i class="fa-solid fa-cart-shopping text-white fs-2"></i>
-                        <span class="quantity-cart position-absolute fs-3 text-white" style="top: -80%; right: -80%;">(<?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?>)</span>
+                        <span class=" position-absolute fs-3 text-white" style="top: -80%; right: -80%;">(<span class="quantity-cart-header"><?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?></span>)</span>
                     </a>
                 </div>
             </div>
