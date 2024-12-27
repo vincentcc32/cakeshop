@@ -167,6 +167,9 @@ if (isset($_GET['view'])) {
         case 'logout':
             if (isset($_SESSION['user'])) {
                 unset($_SESSION['user']);
+                if (isset($_SESSION['cart'])) {
+                    unset($_SESSION['cart']);
+                }
                 header("Location: index.php?ctrl=user&view=login");
             } else {
                 include_once "./views/templates/head.php";

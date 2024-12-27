@@ -42,6 +42,15 @@ if (isset($_GET['view'])) {
             include_once "./models/ModelProduct.php";
 
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                if (isset($_GET['deletecmt'])) {
+                    $time = htmlspecialchars($_GET['time'], ENT_QUOTES);
+                    $maSpCmt = (int)htmlspecialchars($_GET['masp'], ENT_QUOTES);
+                    deleteCmtByID($_SESSION['user']['MaTaiKhoan'], $maSpCmt, $time);
+                    exit;
+                }
+            }
+
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 if (isset($_GET['cmt'])) {
                     $content = htmlspecialchars($_GET['cmt'], ENT_QUOTES);
                     $maSpCmt = (int)htmlspecialchars($_GET['masp']);
@@ -53,25 +62,44 @@ if (isset($_GET['view'])) {
                 if (isset($_GET['sl'])) {
                     $sl = (int)htmlspecialchars($_GET['sl'], ENT_QUOTES);
                     $index = (int)htmlspecialchars($_GET['index'], ENT_QUOTES);
-                    if (!isset($_SESSION['cart'])) {
-                        $_SESSION['cart'] = [];
-                    }
-                    $hasSP = true;
-                    foreach ($_SESSION['cart'] as &$value) {
-                        if ($value['MaSanPham'] === $index) {
-                            $value['SoLuong'] += $sl;
-                            $hasSP = false;
-                            break;
+                    if (!isset($_SESSION['user'])) {
+                        if (!isset($_SESSION['cart'])) {
+                            $_SESSION['cart'] = [];
                         }
+                        $hasSP = true;
+                        foreach ($_SESSION['cart'] as &$value) {
+                            if ($value['MaSanPham'] === $index) {
+                                $value['SoLuong'] += $sl;
+                                $hasSP = false;
+                                break;
+                            }
+                        }
+                        if ($hasSP) {
+                            array_push($_SESSION['cart'], [
+                                'MaSanPham' => $index,
+                                'SoLuong' => $sl
+                            ]);
+                        }
+                        echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
+                        exit;
+                    } else {
+                        $spTmp = getProductByID($index);
+                        $thanhTien = 0;
+                        if (empty($spTmp['GiaGiam'])) {
+                            $thanhTien = $spTmp['Gia'] * $sl;
+                        } else {
+                            $thanhTien = $spTmp['GiaGiam'] * $sl;
+                        }
+                        if (checkCart($_SESSION['user']['MaTaiKhoan'], $index)) {
+                            $slOld = getSlSPByID($_SESSION['user']['MaTaiKhoan'], $index)['SoLuong'];
+                            updateQuantityCart($index, $_SESSION['user']['MaTaiKhoan'], $sl + $slOld, $thanhTien);
+                        } else {
+                            addCartByID($_SESSION['user']['MaTaiKhoan'], $index, $sl, $thanhTien);
+                        }
+                        $_SESSION['cart'] = getProductCartByID($_SESSION['user']['MaTaiKhoan']);
+                        echo quantityProductCartByID($_SESSION['user']['MaTaiKhoan'])['SL'];
+                        exit;
                     }
-                    if ($hasSP) {
-                        array_push($_SESSION['cart'], [
-                            'MaSanPham' => $index,
-                            'SoLuong' => $sl
-                        ]);
-                    }
-                    echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
-                    exit;
                 }
             }
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -81,6 +109,15 @@ if (isset($_GET['view'])) {
                     $maTK = $_SESSION['user']['MaTaiKhoan'];
                     $maSP = (int) htmlspecialchars($_GET['masp']);
                     addRating($maSP, $maTK, $sao, $noiDung);
+                    exit;
+                }
+            }
+
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                if (isset($_GET['deleterating'])) {
+                    $time = htmlspecialchars($_GET['time'], ENT_QUOTES);
+                    $maSpCmt = (int)htmlspecialchars($_GET['masp'], ENT_QUOTES);
+                    deleteRatingByID($_SESSION['user']['MaTaiKhoan'], $maSpCmt, $time);
                     exit;
                 }
             }
@@ -121,28 +158,18 @@ if (isset($_GET['view'])) {
             include_once "./models/ModelProduct.php";
 
             if (isset($_SESSION['cart'])) {
-                foreach ($_SESSION['cart'] as &$value) {
-                    $tmp = getProductByID($value['MaSanPham']);
-                    $value['Anh'] = $tmp['Anh'];
-                    $value['TenSanPham'] = $tmp['TenSanPham'];
-                    $value['Gia'] = $tmp['Gia'];
-                    $value['GiaGiam'] = $tmp['GiaGiam'];
-                    unset($tmp);
-                    unset($value);
-                }
-            }
-
-            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                if (isset($_GET['sl'])) {
-                    $sl = (int)htmlspecialchars($_GET['sl'], ENT_QUOTES);
-                    $index = (int)htmlspecialchars($_GET['index'], ENT_QUOTES);
+                if (!isset($_SESSION['user'])) {
                     foreach ($_SESSION['cart'] as &$value) {
-                        if ($value['MaSanPham'] === $index) {
-                            $value['SoLuong'] = $sl;
-                            break;
-                        }
+                        $tmp = getProductByID($value['MaSanPham']);
+                        $value['Anh'] = $tmp['Anh'];
+                        $value['TenSanPham'] = $tmp['TenSanPham'];
+                        $value['Gia'] = $tmp['Gia'];
+                        $value['GiaGiam'] = $tmp['GiaGiam'];
+                        unset($tmp);
+                        unset($value);
                     }
-                    exit;
+                } else {
+                    $_SESSION['cart'] = getProductCartByID($_SESSION['user']['MaTaiKhoan']);
                 }
             }
 
@@ -150,11 +177,24 @@ if (isset($_GET['view'])) {
                 if (isset($_GET['sl'])) {
                     $sl = (int)htmlspecialchars($_GET['sl'], ENT_QUOTES);
                     $index = (int)htmlspecialchars($_GET['index'], ENT_QUOTES);
-                    foreach ($_SESSION['cart'] as &$value) {
-                        if ($value['MaSanPham'] === $index) {
-                            $value['SoLuong'] = $sl;
-                            break;
+                    if (!isset($_SESSION['user'])) {
+                        foreach ($_SESSION['cart'] as &$value) {
+                            if ($value['MaSanPham'] === $index) {
+                                $value['SoLuong'] = $sl;
+                                break;
+                            }
                         }
+                    } else {
+                        $spTmp = getProductByID($index);
+                        $thanhTien = 0;
+                        if (empty($spTmp['GiaGiam'])) {
+                            $thanhTien = $spTmp['Gia'] * $sl;
+                        } else {
+                            $thanhTien = $spTmp['GiaGiam'] * $sl;
+                        }
+                        updateQuantityCart($index, $_SESSION['user']['MaTaiKhoan'], $sl, $thanhTien);
+
+                        $_SESSION['cart'] = getProductCartByID($_SESSION['user']['MaTaiKhoan']);
                     }
                     exit;
                 }
@@ -162,15 +202,26 @@ if (isset($_GET['view'])) {
 
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 if (isset($_GET['action']) && isset($_GET['index'])) {
-                    for ($i = 0; $i < count($_SESSION['cart']); $i++) {
-                        if ($_SESSION['cart'][$i]['MaSanPham'] === (int)htmlspecialchars($_GET['index'], ENT_QUOTES)) {
-                            array_splice($_SESSION['cart'], $i, 1);
-                            if (count($_SESSION['cart']) === 0) {
-                                unset($_SESSION['cart']);
+                    $index = (int)htmlspecialchars($_GET['index'], ENT_QUOTES);
+                    $maSPDelete = (int)htmlspecialchars($_GET['masp'], ENT_QUOTES);
+                    if (!isset($_SESSION['user'])) {
+                        for ($i = 0; $i < count($_SESSION['cart']); $i++) {
+                            if ($_SESSION['cart'][$i]['MaSanPham'] === $index) {
+                                array_splice($_SESSION['cart'], $i, 1);
+                                if (count($_SESSION['cart']) === 0) {
+                                    unset($_SESSION['cart']);
+                                }
+                                break;
                             }
-                            break;
+                        }
+                    } else {
+                        deleteProductCart($maSPDelete, $_SESSION['user']['MaTaiKhoan']);
+                        $_SESSION['cart'] = getProductCartByID($_SESSION['user']['MaTaiKhoan']);
+                        if (empty(quantityProductCartByID($_SESSION['user']['MaTaiKhoan'])['SL'])) {
+                            unset($_SESSION['cart']);
                         }
                     }
+                    exit;
                 }
             }
 
@@ -249,6 +300,7 @@ if (isset($_GET['view'])) {
                         $_SESSION['mess'] = "Chức năng đang phát triển!";
                     }
                     if (isset($check) && $check) {
+                        deleteAllProductCart($_SESSION['user']['MaTaiKhoan']);
                         unset($_SESSION['cart']);
                         thankBuyStore($_SESSION['user']['Email']);
                         header("Location: index.php?ctrl=user&view=profile");

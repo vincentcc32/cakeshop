@@ -75,14 +75,20 @@
                                     <?php foreach ($bl as $value) : ?>
                                         <div class="d-flex gap-3 mb-5 w-100">
                                             <div class="">
-                                                <img src="./public/images/<?= empty($value['AnhDaiDien']) ? 'avt.png' : $value['AnhDaiDien'] ?>" alt=""
+                                                <img src="./public/images/<?= empty($value['AnhDaiDien']) ? 'avatar.png' : $value['AnhDaiDien'] ?>" alt=""
                                                     style="width: 60px; height: 60px;">
                                             </div>
                                             <div class="w-100">
                                                 <h4 class="fs-3 w-md-100" style="width: 85%;width: 85%; white-space: normal; word-wrap: break-word;"><?= $value['TenTaiKhoan'] ?> - <span><?= $value['ThoiGianBinhLuan'] ?></span>
                                                 </h4>
                                                 <p class="fs-4 w-md-100" style="width: 85%;width: 85%; white-space: normal; word-wrap: break-word;"><?= $value['NoiDung'] ?></p>
+                                                <?php if (isset($_SESSION['user']) && $_SESSION['user']['MaTaiKhoan'] === $value['MaTaiKhoan']): ?>
+                                                    <div class="cmt-action-delete cursor-pointer" data-time="<?= $value['ThoiGianBinhLuan'] ?>">
+                                                        <i class="fa-solid fa-trash fs-3 p-2" style="color: #f31212;"></i>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
+
                                         </div>
                                     <?php endforeach; ?>
                                 <?php else: ?>
@@ -140,7 +146,7 @@
                             <?php foreach ($rating as $value) : ?>
                                 <div class="d-flex gap-3 mb-5 w-100">
                                     <div class="">
-                                        <img src="./public/images/<?= empty($value['AnhDaiDien']) ? 'avt.png' : $value['AnhDaiDien'] ?>" alt=""
+                                        <img src="./public/images/<?= empty($value['AnhDaiDien']) ? 'avatar.png' : $value['AnhDaiDien'] ?>" alt=""
                                             style="width: 60px; height: 60px;">
                                     </div>
                                     <div class="w-100">
@@ -155,6 +161,11 @@
                                             <?php endfor; ?>
                                         </div>
                                         <p class="fs-4 w-md-100" style="width: 85%;width: 85%; white-space: normal; word-wrap: break-word;"><?= $value['NoiDungDanhGia'] ?></p>
+                                        <?php if (isset($_SESSION['user']) && $_SESSION['user']['MaTaiKhoan'] === $value['MaTaiKhoan']): ?>
+                                            <div class="rating-action-delete cursor-pointer" data-time="<?= $value['ThoiGianDanhGia'] ?>">
+                                                <i class="fa-solid fa-trash fs-3 p-2" style="color: #f31212;"></i>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -237,9 +248,21 @@
         xmlhttp.send();
     }
 
+    function deleteCmt(masp, time) {
+        const xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", `index.php?ctrl=product&view=detail&deletecmt&masp=${masp}&time=${time}`);
+        xmlhttp.send();
+    }
+
     function addRating(content, masp, sao) {
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", `index.php?ctrl=product&view=detail&rating=${content}&masp=${masp}&sao=${sao}`);
+        xmlhttp.send();
+    }
+
+    function deleteRating(masp, time) {
+        const xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", `index.php?ctrl=product&view=detail&deleterating&masp=${masp}&time=${time}`);
         xmlhttp.send();
     }
 
@@ -252,7 +275,8 @@
     const masp = document.querySelector('.main__detail-title').getAttribute('data-masp');
     const cmtBtn = document.querySelector('button[name="cmt"]');
     const inputCmt = document.querySelector('textarea[name="content"]');
-
+    const deleteCmtBtn = document.querySelectorAll('.cmt-action-delete');
+    const deleteRatingBtn = document.querySelectorAll('.rating-action-delete');
 
     quantity.onclick = (e) => {
         e.preventDefault();
@@ -286,7 +310,7 @@
                 let elemt = `
                 <div class="d-flex gap-3 mb-5 w-100">
                     <div class="">
-                        <img src="./public/images/<?= empty($value['AnhDaiDien']) ? 'avt.png' : $value['AnhDaiDien'] ?>" alt=""
+                        <img src="./public/images/<?= empty($_SESSION['user']['AnhDaiDien']) ? 'avatar.png' : $_SESSION['user']['AnhDaiDien'] ?>" alt=""
                             style="width: 60px; height: 60px;">
                     </div>
                     <div class="w-100">
@@ -305,6 +329,17 @@
         }
     }
 
+    if (deleteCmtBtn) {
+        deleteCmtBtn.forEach((item, index) => {
+            item.onclick = () => {
+                alert('Bạn đã xóa 1 bình luận!');
+                item.parentElement.parentElement.remove();
+
+                deleteCmt(quantity.getAttribute('data-id'), item.getAttribute('data-time'));
+            }
+        })
+    }
+
     const ratingBtn = document.querySelector('button[name="rating-btn"]');
     if (ratingBtn) {
         ratingBtn.onclick = (e) => {
@@ -314,7 +349,7 @@
             let elemt = `
                 <div class="d-flex gap-3 mb-5 w-100">
                             <div class="">
-                                <img src="./public/images/<?= empty($value['AnhDaiDien']) ? 'avt.png' : $value['AnhDaiDien'] ?>" alt=""
+                                <img src="./public/images/<?= empty($_SESSION['user']['AnhDaiDien']) ? 'avatar.png' : $_SESSION['user']['AnhDaiDien'] ?>" alt=""
                                     style="width: 60px; height: 60px;">
                             </div>
                             <div class="w-100">
@@ -343,7 +378,18 @@
             document.querySelector('input[name="rating"][value="1"]').checked = true;
         }
     }
+
+    if (deleteRatingBtn) {
+        deleteRatingBtn.forEach((item, index) => {
+            item.onclick = () => {
+                alert('Bạn đã xóa 1 đánh giá!');
+                item.parentElement.parentElement.remove();
+                deleteRating(quantity.getAttribute('data-id'), item.getAttribute('data-time'))
+            }
+        })
+    }
 </script>
+
 
 <script>
     const toastTrigger = document.getElementById('liveToastBtn')

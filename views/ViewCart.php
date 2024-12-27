@@ -113,9 +113,9 @@
         xmlhttp.send();
     }
 
-    function deleteCart(index) {
+    function deleteCart(index, masp) {
         const xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", `index.php?ctrl=product&view=cart&action=delete&index=${index}`);
+        xmlhttp.open("GET", `index.php?ctrl=product&view=cart&action=delete&index=${index}&masp=${masp}`);
         xmlhttp.send();
     }
 
@@ -178,7 +178,7 @@
                 const newSumTotal = newTotal + 15000;
                 sumTotal.innerText = newSumTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
 
-                deleteCart(button.getAttribute('data-delete'));
+                deleteCart(button.getAttribute('data-delete'), quantity[index].getAttribute('data-id'));
 
                 tableRow[index].remove();
 

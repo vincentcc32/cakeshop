@@ -490,3 +490,117 @@ function checkCate($cate)
         return false;
     }
 }
+
+function getProductCartByID($maTK)
+{
+    global $conn;
+    $sql = "SELECT * FROM GIOHANG INNER JOIN SANPHAM on GIOHANG.MaSanPham = SANPHAM.MaSanPham WHERE MaTaiKhoan = :MaTaiKhoan";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MaTaiKhoan", $maTK, PDO::PARAM_INT);
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    return $stmt->fetchAll();
+}
+
+function checkCart($id, $maSP)
+{
+    global $conn;
+    $sql = "SELECT * FROM `GIOHANG` where MaSanPham = :MaSanPham AND MaTaiKhoan = :MaTaiKhoan";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MaSanPham", $maSP, PDO::PARAM_INT);
+    $stmt->bindValue(":MaTaiKhoan", $id, PDO::PARAM_INT);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function updateQuantityCart($maSp, $maTK, $sl, $thanhTien)
+{
+    global $conn;
+    $sql = "UPDATE GIOHANG SET SoLuong = :SoLuong , ThanhTien = :ThanhTien WHERE MaSanPham = :MaSanPham AND MaTaiKhoan = :MaTaiKhoan";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":SoLuong", $sl, PDO::PARAM_INT);
+    $stmt->bindValue(":ThanhTien", $thanhTien, PDO::PARAM_INT);
+    $stmt->bindValue(":MaSanPham", $maSp, PDO::PARAM_INT);
+    $stmt->bindValue(":MaTaiKhoan", $maTK, PDO::PARAM_INT);
+    return $stmt->execute();
+}
+
+function addCartByID($maTk, $maSP, $sl, $thanhTien)
+{
+    global $conn;
+    $sql = "INSERT INTO GIOHANG(MaTaiKhoan , MaSanPham , SoLuong , ThanhTien) value(:MaTaiKhoan ,:MaSanPham , :SoLuong , :ThanhTien)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MaTaiKhoan", $maTk, PDO::PARAM_INT);
+    $stmt->bindValue(":MaSanPham", $maSP, PDO::PARAM_INT);
+    $stmt->bindValue(":SoLuong", $sl, PDO::PARAM_INT);
+    $stmt->bindValue(":ThanhTien", $thanhTien, PDO::PARAM_INT);
+    return $stmt->execute();
+}
+
+function deleteProductCart($maSp, $maTK)
+{
+    global $conn;
+    $sql = "DELETE FROM GIOHANG WHERE MaSanPham = :MaSanPham AND MaTaiKhoan = :MaTaiKhoan";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MaSanPham", $maSp, PDO::PARAM_INT);
+    $stmt->bindValue(":MaTaiKhoan", $maTK, PDO::PARAM_INT);
+    return $stmt->execute();
+}
+
+function deleteAllProductCart($maTK)
+{
+    global $conn;
+    $sql = "DELETE FROM GIOHANG WHERE MaTaiKhoan = :MaTaiKhoan";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MaTaiKhoan", $maTK, PDO::PARAM_INT);
+    return $stmt->execute();
+}
+
+function quantityProductCartByID($maTK)
+{
+    global $conn;
+    $sql = "SELECT count(*) as SL FROM GIOHANG WHERE MaTaiKhoan = :MaTaiKhoan GROUP BY MaTaiKhoan";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MaTaiKhoan", $maTK, PDO::PARAM_INT);
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    return $stmt->fetch();
+}
+
+function getSlSPByID($maTK, $maSp)
+{
+    global $conn;
+    $sql = "SELECT SoLuong FROM GIOHANG WHERE MaTaiKhoan = :MaTaiKhoan AND MaSanPham = :MaSanPham";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MaTaiKhoan", $maTK, PDO::PARAM_INT);
+    $stmt->bindValue(":MaSanPham", $maSp, PDO::PARAM_INT);
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    return $stmt->fetch();
+}
+
+function deleteCmtByID($maTK, $maSP, $time)
+{
+    global $conn;
+    $sql = "DELETE FROM BINHLUAN WHERE MaTaiKhoan = :MaTaiKhoan AND MaSanPham = :MaSanPham AND ThoiGianBinhLuan = :ThoiGianBinhLuan";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MaTaiKhoan", $maTK, PDO::PARAM_INT);
+    $stmt->bindValue(":MaSanPham", $maSP, PDO::PARAM_INT);
+    $stmt->bindValue(":ThoiGianBinhLuan", $time, PDO::PARAM_STR);
+    return $stmt->execute();
+}
+
+function deleteRatingByID($maTK, $maSP, $time)
+{
+    global $conn;
+    $sql = "DELETE FROM DANHGIA WHERE MaTaiKhoan = :MaTaiKhoan AND MaSanPham = :MaSanPham AND ThoiGianDanhGia = :ThoiGianDanhGia";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":MaTaiKhoan", $maTK, PDO::PARAM_INT);
+    $stmt->bindValue(":MaSanPham", $maSP, PDO::PARAM_INT);
+    $stmt->bindValue(":ThoiGianDanhGia", $time, PDO::PARAM_STR);
+    return $stmt->execute();
+}

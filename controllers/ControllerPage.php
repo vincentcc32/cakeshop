@@ -8,6 +8,10 @@ if (isset($_GET['view'])) {
 
             $dssm = showAllCate();
 
+            if (isset($_SESSION['user'])) {
+                $_SESSION['cart'] = getProductCartByID($_SESSION['user']['MaTaiKhoan']);
+            }
+
             // view
             include_once "./views/templates/head.php";
             include_once "./views/templates/header.php";
