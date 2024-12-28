@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./public/fontawesome-free-6.6.0-web/css/all.min.css">
     <link rel="stylesheet" href="./public/css/bootstrap.min.css">
     <link rel="stylesheet" href="./public/css/normalize.min.css">
+    <link rel="stylesheet" href="./public/css/animation.css">
     <link rel="stylesheet" href="./public/css/style.css">
     <link rel="stylesheet" href="./public/css/responsive.css">
     <title>Cake Shop</title>

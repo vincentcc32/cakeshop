@@ -1,6 +1,23 @@
 <main class="main__home pb-5">
     <div class="main__home-banner">
-        <img src="./public/images/banner.png" alt="" class="w-100">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="4000">
+                    <img src="./public/images/banner.png" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="./public/images/banner.png" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon fs-2" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span class="carousel-control-next-icon fs-2" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </div>
     <div class="main__home-category text-center">
         <h2 class="text-uppercase text-center d-inline-block main-heading">Danh Mục</h2>
@@ -24,3 +41,9 @@
         </div>
     </div>
 </main>
+
+<div class="icon-zalo">
+    <a href="https://zalo.me/0789475518" target="_blank">
+        <img src="./public/images/icon-zalo.png" alt="" class="w-100">
+    </a>
+</div>
