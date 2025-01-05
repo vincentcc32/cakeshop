@@ -14,7 +14,7 @@ if (isset($_GET['view'])) {
 
                     $sl = floor(getAllProductInCate($id)['SL'] / 12);
                     if (isset($_GET['page'])) {
-                        $page = (int)htmlspecialchars($_GET['page '], ENT_QUOTES);
+                        $page = (int)htmlspecialchars($_GET['page'], ENT_QUOTES);
                         $spById = getProductByCate($id, $page * 12);
                     }
                 } else {
