@@ -73,12 +73,12 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fs-4 py-2">Phí vận chuyển:</h4>
-                                    <h4 class="fs-4 py-2">15,000 đ</h4>
+                                    <h4 class="fs-4 py-2"> <?= number_format(SHIP) . 'đ' ?></h4>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between pt-4">
                                 <h3 class="fs-4 py-2">Tổng tiền thanh toán:</h3>
-                                <h3 class="fs-4 py-2 sum-total"><?= number_format($sumMoneyCart + 15000) ?>đ</h3>
+                                <h3 class="fs-4 py-2 sum-total"><?= number_format($sumMoneyCart + SHIP) ?>đ</h3>
                             </div>
                             <?php if (isset($_SESSION['user'])): ?>
                                 <a href="index.php?ctrl=product&view=checkout"
@@ -141,7 +141,7 @@
             sumMoney[i].setAttribute('data-sum-money', tien);
             total.innerText = (parseInt(total.getAttribute('data-total')) + parseInt(money[0].getAttribute('data-money'))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
             total.setAttribute('data-total', (parseInt(total.getAttribute('data-total')) + parseInt(money[0].getAttribute('data-money'))));
-            sumTotal.innerText = (parseInt(total.getAttribute('data-total')) + 15000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
+            sumTotal.innerText = (parseInt(total.getAttribute('data-total')) + <?= SHIP ?>).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
             addCart(quantity[i].innerText, quantity[i].getAttribute('data-id'));
         }
     }
@@ -156,7 +156,7 @@
                 sumMoney[i].setAttribute('data-sum-money', tien);
                 total.innerText = (parseInt(total.getAttribute('data-total')) - parseInt(money[0].getAttribute('data-money'))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
                 total.setAttribute('data-total', (parseInt(total.getAttribute('data-total')) - parseInt(money[0].getAttribute('data-money'))));
-                sumTotal.innerText = (parseInt(total.getAttribute('data-total')) + 15000).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
+                sumTotal.innerText = (parseInt(total.getAttribute('data-total')) + <?= SHIP ?>).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
                 addCart(quantity[i].innerText, quantity[i].getAttribute('data-id'));
             }
         }
@@ -175,7 +175,7 @@
                 total.innerText = newTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
                 total.setAttribute('data-total', newTotal);
 
-                const newSumTotal = newTotal + 15000;
+                const newSumTotal = newTotal + <?= SHIP ?>;
                 sumTotal.innerText = newSumTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "đ";
 
                 deleteCart(button.getAttribute('data-delete'), quantity[index].getAttribute('data-id'));

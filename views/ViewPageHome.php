@@ -6,7 +6,10 @@
                     <img src="./public/images/banner.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item" data-bs-interval="4000">
-                    <img src="./public/images/banner.png" class="d-block w-100" alt="...">
+                    <img src="./public/images/banner1.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="4000">
+                    <img src="./public/images/banner2.jpg" class="d-block w-100" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">

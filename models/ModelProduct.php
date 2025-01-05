@@ -232,11 +232,11 @@ function deleteCategoryByID($id)
     return $stmt->execute();
 }
 
-function addOrder($phiVanChuyen, $trangThai, $thanhTienHoaDon, $tongTienHoaDon, $maTaiKhoan, $ten, $sdt, $diaChi, $hinhThucTT)
+function addOrder($phiVanChuyen, $trangThai, $thanhTienHoaDon, $tongTienHoaDon, $maTaiKhoan, $ten, $sdt, $diaChi, $hinhThucTT, $maXacNhanCK)
 {
     global $conn;
-    $sql = "INSERT INTO HOADON(PhiVanChuyen, TrangThai , ThanhTienHoaDon , TongTienHoaDon , MaTaiKhoan , TenNguoiNhan , SDTNguoiNhan , DiaChiNhanHang , HinhThucTT)
-            value(:PhiVanChuyen ,:TrangThai , :ThanhTienHoaDon , :TongTienHoaDon , :MaTaiKhoan , :TenNguoiNhan , :SDTNguoiNhan , :DiaChiNhanHang , :HinhThucTT)";
+    $sql = "INSERT INTO HOADON(PhiVanChuyen, TrangThai , ThanhTienHoaDon , TongTienHoaDon , MaTaiKhoan , TenNguoiNhan , SDTNguoiNhan , DiaChiNhanHang , HinhThucTT , MaXacNhanCK)
+            value(:PhiVanChuyen ,:TrangThai , :ThanhTienHoaDon , :TongTienHoaDon , :MaTaiKhoan , :TenNguoiNhan , :SDTNguoiNhan , :DiaChiNhanHang , :HinhThucTT , :MaXacNhanCK)";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(":PhiVanChuyen", $phiVanChuyen, PDO::PARAM_INT);
     $stmt->bindValue(":TrangThai", $trangThai, PDO::PARAM_INT);
@@ -247,6 +247,7 @@ function addOrder($phiVanChuyen, $trangThai, $thanhTienHoaDon, $tongTienHoaDon, 
     $stmt->bindValue(":SDTNguoiNhan", $sdt, PDO::PARAM_STR);
     $stmt->bindValue(":DiaChiNhanHang", $diaChi, PDO::PARAM_STR);
     $stmt->bindValue(":HinhThucTT", $hinhThucTT, PDO::PARAM_INT);
+    $stmt->bindValue(":MaXacNhanCK", $maXacNhanCK, PDO::PARAM_STR);
     return $stmt->execute();
 }
 
@@ -362,10 +363,21 @@ function deleteOrderAdmin($id)
     return $stmt->execute();
 }
 
-function checkInvoice($soHoaDon)
+function checkDetailInvoice($soHoaDon)
 {
     global $conn;
     $sql = "SELECT * FROM CT_HOADON WHERE SoHoaDon = :SoHoaDon";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":SoHoaDon", $soHoaDon, PDO::PARAM_INT);
+    $stmt->execute();
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    return $stmt->fetch();
+}
+
+function checkInvoice($soHoaDon)
+{
+    global $conn;
+    $sql = "SELECT * FROM HOADON WHERE SoHoaDon = :SoHoaDon";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(":SoHoaDon", $soHoaDon, PDO::PARAM_INT);
     $stmt->execute();

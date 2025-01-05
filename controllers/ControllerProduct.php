@@ -14,7 +14,7 @@ if (isset($_GET['view'])) {
 
                     $sl = floor(getAllProductInCate($id)['SL'] / 12);
                     if (isset($_GET['page'])) {
-                        $page = (int)htmlspecialchars($_GET['id'], ENT_QUOTES);
+                        $page = (int)htmlspecialchars($_GET['page '], ENT_QUOTES);
                         $spById = getProductByCate($id, $page * 12);
                     }
                 } else {
@@ -259,7 +259,7 @@ if (isset($_GET['view'])) {
             include_once "./models/ModelProduct.php";
             include_once "./models/phpmailer.php";
 
-            if (isset($_POST['dathang'])) {
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (isset($_SESSION['cart'])) {
                     $hoTen = htmlspecialchars($_POST['ten'], ENT_QUOTES);
                     $sdt = htmlspecialchars($_POST['sdt'], ENT_QUOTES);
@@ -282,7 +282,8 @@ if (isset($_GET['view'])) {
                     $trangThai = 0;
                     if ($hinhthuc == 'cod') {
                         $hinhthuc = 0;
-                        $check = addOrder($vanchuyen, $trangThai, $thanhtienhd, tongTienHoaDon: $tongTien, maTaiKhoan: $maTk, ten: $hoTen, sdt: $sdt, diaChi: $diaChi, hinhThucTT: $hinhthuc);
+                        $maXacNhanCK = null;
+                        $check = addOrder($vanchuyen, $trangThai, $thanhtienhd, tongTienHoaDon: $tongTien, maTaiKhoan: $maTk, ten: $hoTen, sdt: $sdt, diaChi: $diaChi, hinhThucTT: $hinhthuc, maXacNhanCK: $maXacNhanCK);
                         $soHoaDon = getMaDonHang($maTk)['SoHoaDon'];
                         foreach ($_SESSION['cart'] as $value) {
                             $maSp = $value['MaSanPham'];
@@ -295,9 +296,21 @@ if (isset($_GET['view'])) {
                             addOrderDetail($soHoaDon, $maSp, $soLuong, $gia);
                         }
                     } else {
-                        $trangThai = 1;
+                        $trangThai = 0;
                         $hinhthuc = 1;
-                        $_SESSION['mess'] = "Chức năng đang phát triển!";
+                        $maXacNhanCK = $_POST['maxacnhanck'];
+                        $check = addOrder($vanchuyen, $trangThai, $thanhtienhd, tongTienHoaDon: $tongTien, maTaiKhoan: $maTk, ten: $hoTen, sdt: $sdt, diaChi: $diaChi, hinhThucTT: $hinhthuc, maXacNhanCK: $maXacNhanCK);
+                        $soHoaDon = getMaDonHang($maTk)['SoHoaDon'];
+                        foreach ($_SESSION['cart'] as $value) {
+                            $maSp = $value['MaSanPham'];
+                            $soLuong = $value['SoLuong'];
+                            if (empty($value['giaGiam'])) {
+                                $gia = $soLuong * $value['Gia'];
+                            } else {
+                                $gia = $soLuong * $value['GiaGiam'];
+                            }
+                            addOrderDetail($soHoaDon, $maSp, $soLuong, $gia);
+                        }
                     }
                     if (isset($check) && $check) {
                         deleteAllProductCart($_SESSION['user']['MaTaiKhoan']);

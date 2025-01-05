@@ -47,7 +47,7 @@
                             <?php if (isset($_GET['page'])): ?>
                                 <a class="text-decoration-none color-primary d-inline-block" href="index.php?ctrl=product&view=category&id=<?= $_GET['id'] ?><?= $_GET['page'] > 1 ? '&page=' . (int)$_GET['page'] - 1 : '' ?>">Trang Trước</a>
                             <?php else: ?>
-                                Trang Trước
+                                <a class="text-decoration-none color-primary d-inline-block">Trang Trước</a>
                             <?php endif; ?>
                         </span>
                         <span class="fs-3 fw-medium p-2 pagi-item pagi-item--bg-color">
@@ -55,13 +55,11 @@
                                 <?php if ((int) $_GET['page'] < $sl): ?>
                                     <a class="text-decoration-none text-white d-inline-block" href="index.php?ctrl=product&view=category&id=<?= $_GET['id'] ?>&page=<?= (int) $_GET['page'] + 1 ?>">Trang Kế Tiếp</a>
                                 <?php else: ?>
-                                    Trang Kế Tiếp
+                                    <a class="text-decoration-none text-white d-inline-block">Trang Kế Tiếp</a>
                                 <?php endif; ?>
                             <?php else: ?>
                                 <a class="text-decoration-none text-white d-inline-block" href="index.php?ctrl=product&view=category&id=<?= $_GET['id'] ?>&page=1">Trang Kế Tiếp</a>
                             <?php endif; ?>
-                        <?php else: ?>
-                            Trang Kế Tiếp
                         <?php endif; ?>
                         </span>
                     </div>

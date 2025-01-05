@@ -26,10 +26,15 @@
                                 <img src="./public/images/cauchuyen.png" alt="" style="width: 3rem;">
                                 Sản phẩm</a>
                         </li>
-                        <li class="p-2">
+                        <li class="p-2" style="border-bottom: 1px solid #9e553b;">
                             <a href="admin.php?ctrl=product&view=listcategory" class="fs-4 text-decoration-none text-black d-block">
                                 <img src="./public/images/lienhe.png" alt="" style="width: 3rem;">
                                 Danh mục</a>
+                        </li>
+                        <li class="p-2">
+                            <a href="admin.php?ctrl=page&view=writeblog" class="fs-4 text-decoration-none text-black d-block">
+                                <img src="./public/images/lienhe.png" alt="" style="width: 3rem;">
+                                Viết bài</a>
                         </li>
                         <li class="p-2">
                             <a href="admin.php?ctrl=user&view=logout" class="fs-4 text-decoration-none text-black d-block">

@@ -21,7 +21,7 @@ function codeForgotPassword($mailTo, $code)
         $email->addAddress($mailTo);
 
         $email->isHTML(true);
-        $email->Subject = 'Cake shop code forgot password ';
+        $email->Subject = 'Cake shop mã xác nhận thay đổi mật khẩu';
         $email->Body = $code;
         $email->send();
     } catch (Exception $th) {
@@ -71,7 +71,7 @@ function thankBuyStore($mailTo)
         $email->isHTML(true);
         $email->Subject = 'Thank You';
         $email->Body = "Cake Shop xin chân thành cảm ơn quý khách đã tin tưởng và đặt hàng tại shop. Đơn hàng của bạn sẽ được giao trong
-        khoảng 1 giờ tới, xin chú ý điện thoại. Quý khách cần hỗ trợ có thể liên hệ zalo: 03664093** hoặc phần chat tại https://Cakeshop.com. Hi vọng quý khách hài lòng với dịch vụ của chúng tôi <3 \n
+        khoảng 1 giờ tới, xin chú ý điện thoại. Quý khách cần hỗ trợ có thể liên hệ zalo: 0789475518 hoặc phần chat tại https://Cakeshop.com. Hi vọng quý khách hài lòng với dịch vụ của chúng tôi <3 \n
         ";
         $email->send();
     } catch (Exception $th) {

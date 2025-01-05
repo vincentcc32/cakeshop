@@ -40,6 +40,11 @@
                                 <img src="./public/images/lienhe.png" alt="" style="width: 3rem;">
                                 Liên Hệ</a>
                         </li>
+                        <li class="p-2" style="border-bottom: 1px solid #9e553b;">
+                            <a href="index.php?ctrl=page&view=blog" class="fs-4 text-decoration-none text-black d-block">
+                                <img src="./public/images/lienhe.png" alt="" style="width: 3rem;">
+                                Blog</a>
+                        </li>
                         <li class="p-2">
                             <?php if (isset($_SESSION['user'])): ?>
                                 <p class="d-inline-flex gap-1">

@@ -63,10 +63,21 @@
                                             <div class="col-md-11">
                                                 <div class="row">
                                                     <div class="col-md-12 d-flex align-items-start flex-column gap-2">
-                                                        <div class="pull-right"><label class=" fs-3 label label-danger text-status  <?= $item['TinhTrang'] === 0 ? 'text-danger' : ($item['TinhTrang'] === 1 ? 'text-primary' : 'text-success') ?>"><?= $item['TinhTrang'] === 0 ? 'Chưa xác nhận' : ($item['TinhTrang'] === 1 ? 'Đang giao' : 'Đã giao hàng') ?></label></div>
-                                                        <span class="fs-4"><strong>Trạng thái: </strong> <span class="trangthai fs-4 label label-info <?= $item['TrangThai'] ? 'text-success' : 'text-danger' ?>"><?= $item['TrangThai'] ? 'Đã thanh toán' : 'Chưa thanh toán' ?></span></span>
-                                                        <span class="fs-4">Thành tiền hóa đơn : <?= number_format($item['ThanhTienHoaDon']) . 'đ' ?>, Phí vận chuyển: <?= number_format($item['PhiVanChuyen']) . 'đ' ?>, Tổng tiền: <?= number_format($item['TongTienHoaDon']) . 'đ' ?></span>
+                                                        <div class="pull-right">
+                                                            <label class=" fs-3 label label-danger text-status  <?= $item['TinhTrang'] === 0 ? 'text-danger' : ($item['TinhTrang'] === 1 ? 'text-primary' : 'text-success') ?>">
+                                                                <?= $item['TinhTrang'] === 0 ? 'Chưa xác nhận' : ($item['TinhTrang'] === 1 ? 'Đang giao' : 'Đã giao hàng') ?>
+                                                            </label>
+                                                        </div>
+                                                        <span class="fs-4 d-flex">
+                                                            <p class="fs-4 fw-bold text-start me-2 trangthai1">Trạng thái:
+                                                                <?= $item['MaXacNhanCK'] !== null && $item['TrangThai'] === 0 ? '<p class="fs-4 text-danger">Chờ xác nhận chuyển khoản (' . $item['MaXacNhanCK'] . ')</p>'
+                                                                    : ($item['TrangThai'] === 1  ? '<p class="fs-4 text-success">Đã thanh toán</p>' : '<p class="fs-4 text-danger">Chưa thanh toán</p>') ?>
+                                                            </p>
+                                                        </span>
                                                     </div>
+                                                    <span class="fs-4 d-block text-start">
+                                                        Thành tiền hóa đơn : <?= number_format($item['ThanhTienHoaDon']) . 'đ' ?>, Phí vận chuyển: <?= number_format($item['PhiVanChuyen']) . 'đ' ?>, Tổng tiền: <?= number_format($item['TongTienHoaDon']) . 'đ' ?>
+                                                    </span>
                                                     <div class="col-md-12 fs-4 d-flex justify-content-start mt-2">Thời gian đặt: <?= $item['ThoiGianDatHang'] ?></div>
                                                 </div>
                                             </div>
@@ -75,10 +86,13 @@
                                 </div>
                                 <div class="action-list col-12 col-sm-3 d-flex justifi-content-center gap-5 align-items-center">
                                     <div class="fs-3 btn-group">
+                                        <?php if ($item['MaXacNhanCK'] !== null && $item['TrangThai'] === 0): ?>
+                                            <button class="btn btn-primary border-0 text-bg-success me-4 fs-3 da-nhan-tien">Đã nhận tiền</button>
+                                        <?php endif; ?>
                                         <?php if ($item['TinhTrang'] === 0): ?>
                                             <button class="btn btn-primary border-0 text-bg-danger fs-3 xacnhan">xác nhận</button>
                                         <?php elseif ($item['TinhTrang'] === 1): ?>
-                                            <button class="btn btn-primary border-0 text-primary fs-3 dagiaohang">Đã giao hàng</button>
+                                            <button class="btn btn-primary border-0 text-white fs-3 dagiaohang">Đã giao hàng</button>
                                         <?php else: ?>
                                             <p class="fs-3 text-success d-inline-block">Xong</p>
                                         <?php endif; ?>
@@ -350,12 +364,23 @@
     const xacnhan = document.querySelectorAll('.row-list-data .xacnhan');
     let dagiaohang = document.querySelectorAll('.row-list-data .dagiaohang');
     let deleteOrderBtn = document.querySelectorAll('.row-list-data .delete-order');
+    let daNhanTien = document.querySelectorAll('.row-list-data .da-nhan-tien');
 
     xacnhan.forEach(item => {
         item.onclick = () => {
             statusUpdate(item.closest('.row-list-data').getAttribute('data-index'), 1);
             alert('Xác nhận thành công!');
             item.closest('.row-list-data').querySelector('.text-status').textContent = 'Đang giao';
+            if (item.closest('.row-list-data').querySelector('.da-nhan-tien')) {
+                item.closest('.row-list-data').querySelector('.trangthai1~p').textContent = `Đã thanh toán`;
+                item.closest('.row-list-data').querySelector('.trangthai1~p').classList.remove('text-danger');
+                item.closest('.row-list-data').querySelector('.trangthai1~p').classList.add('text-success');
+            } else {
+                item.closest('.row-list-data').querySelector('.trangthai1~p').textContent = `Chưa thanh toán`;
+            }
+
+            item.closest('.row-list-data').querySelector('.text-status').classList.remove('text-danger');
+            item.closest('.row-list-data').querySelector('.text-status').classList.add('text-primary');
             item.parentElement.innerHTML = `<button class="btn btn-primary fs-3 dagiaohang">Đã giao hàng</button>`;
             dagiaohang = document.querySelectorAll('.row-list-data .dagiaohang');
             danggiaohang();
@@ -363,13 +388,17 @@
     });
 
     function danggiaohang() {
-        dagiaohang.forEach(item => {
-            item.onclick = () => {
-                statusUpdate(item.closest('.row-list-data').getAttribute('data-index'), 2);
+        dagiaohang.forEach(dangGiaoHang => {
+            dangGiaoHang.onclick = () => {
+                statusUpdate(dangGiaoHang.closest('.row-list-data').getAttribute('data-index'), 2);
                 alert('Đã nhận hàng');
-                item.closest('.row-list-data').querySelector('.text-status').textContent = 'Đã giao hàng';
-                item.closest('.row-list-data').querySelector('.trangthai').textContent = 'Đã thanh toán';
-                item.parentElement.innerHTML = `<p class="fs-3 text-success d-inline-block">Xong</p>`;
+                dangGiaoHang.closest('.row-list-data').querySelector('.trangthai1~p').textContent = `Đã thanh toán`;
+                dangGiaoHang.closest('.row-list-data').querySelector('.trangthai1~p').classList.remove('text-danger');
+                dangGiaoHang.closest('.row-list-data').querySelector('.trangthai1~p').classList.add('text-success');
+                dangGiaoHang.closest('.row-list-data').querySelector('.text-status').textContent = 'Đã giao hàng';
+                dangGiaoHang.closest('.row-list-data').querySelector('.text-status').classList.remove('text-primary');
+                dangGiaoHang.closest('.row-list-data').querySelector('.text-status').classList.add('text-success');
+                dangGiaoHang.parentElement.innerHTML = `<p class="fs-3 text-success d-inline-block">Xong</p>`;
             }
         });
     }
@@ -383,6 +412,20 @@
             }
         }
     });
+
+    if (daNhanTien) {
+        daNhanTien.forEach(item => {
+            item.onclick = () => {
+                statusUpdate(item.closest('.row-list-data').getAttribute('data-index'), 3);
+                alert('Đã nhận tiền');
+                item.closest('.row-list-data').querySelector('.trangthai1~p').textContent = `Đã thanh toán`;
+                item.closest('.row-list-data').querySelector('.trangthai1~p').classList.remove('text-danger');
+                item.closest('.row-list-data').querySelector('.trangthai1~p').classList.add('text-success');
+                item.remove();
+                daNhanTien = document.querySelectorAll('.row-list-data .da-nhan-tien');
+            }
+        });
+    }
 </script>
 
 <script>
